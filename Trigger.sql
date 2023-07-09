@@ -23,14 +23,14 @@ END;
 /
 
 
---This trigger prevents the deletion of a product if their create_id is below '12-05-23' and raises an exception.
+--This trigger prevents the deletion of a product if their created_at is below '12-05-23' and raises an exception.
 
 
 CREATE OR REPLACE TRIGGER trg_product_delete
 BEFORE DELETE ON product_name
 FOR EACH ROW
 BEGIN
-    IF :OLD.create_id < 18 THEN
+    IF :OLD.created_at < '12-0-23' THEN
         RAISE_APPLICATION_ERROR('12-05-23', 'Cannot delete product. you have it.');
     END IF;
 END;
@@ -58,13 +58,15 @@ CREATE OR REPLACE TRIGGER trg_order_details_delete
 AFTER DELETE ON userlist
 FOR EACH ROW
 BEGIN
-    DELETE FROM order_details WHERE order_id = :OLD.order_id;
+    DELETE FROM order_details WHERE id = :OLD.id;
 END;
 /
 
-
-
-
+select * from user_triggers;
+drop trigger  trg_order_details_delete;
+drop trigger trg_product_category_delete;
+drop trigger trg_product_delete;
+drop trigger trg_userlist_insert;
 
 
 
