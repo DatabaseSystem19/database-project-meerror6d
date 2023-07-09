@@ -30,8 +30,6 @@ end;
 /
 
 
----count product row---
-
 set serveroutput on
 declare 
 products_row products%rowtype;
@@ -41,6 +39,7 @@ end;
 /
 
 ---show everything using cursor from products table---
+  ---count product row---
 set serveroutput on
 declare 
 cursor product_cursor is
